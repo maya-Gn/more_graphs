@@ -2,7 +2,7 @@ ADDITIONAL METHODS:
     File name:
 
 # Description:
-0. Provided -> provived from book's website.
+0. Was left as exercise -> sudo code provided.
     1. GraphPackage directory.
         a) With exception to the DirectedGraph.java file, most code is from the books website. In places where needed, I used the java.util libary instead of using the book's "provided" library as in roughly most cases I would have had to write the code. 
         b) The DirectedGraph.java: pg 863
