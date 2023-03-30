@@ -9,3 +9,11 @@
     5.1) git add --all
 6) git commit -m "first commint message"
 7) git push -u origin master
+
+
+If you added this path by mistake, you can remove it from the
+hint: index with:
+hint:
+hint:   git rm --cached gs-rest-service
+hint:
+hint: See "git help submodule" for more information.
