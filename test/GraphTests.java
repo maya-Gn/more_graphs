@@ -13,6 +13,9 @@ import GraphPackage.GraphInterface;
 import ListPackage.LinkedListWithIterator;
 import static test.NamedConstants.*;
 
+/**
+ * @author Chris
+ */
 public class GraphTests<T> {
     
     public static void main(String[] args)
@@ -20,14 +23,65 @@ public class GraphTests<T> {
         GraphInterface<String> init_graph = new DirectedGraph<>();
         ArrayDeque<String> path = new ArrayDeque<>();
         Double path_length = 0.0;
-        int path_len = 0;
-        
-        init_graph = getInput();
-        path_length = init_graph.getCheapestPath("A", "H", path);
-        // path_len = init_graph.getShortestPath("A", "H", path);
-        ALGORITHM_STRING = "Cheapest Path";
-        writeToFile(path_length, path, CHEAPEST_LENGTH_STRING, GRAPH_FILE
-        , ALGORITHM_STRING);
+        int algo = 0;
+
+        algo = algorithmToRun();
+
+        if (algo == 1)
+        {
+            init_graph = getInput();
+            path_length = (double)init_graph.getShortestPath("A", "H", path);
+            ALGORITHM_STRING = "Shortest Path";
+            writeToFile(path_length, path, CHEAPEST_LENGTH_STRING, GRAPH_FILE
+            , ALGORITHM_STRING);
+        }else
+        { // the exceptions in algorithmToRun should catch invalid inputs
+            init_graph = getInput();
+            path_length = init_graph.getCheapestPath("A", "H", path);
+            ALGORITHM_STRING = "Cheapest Path";
+            writeToFile(path_length, path, CHEAPEST_LENGTH_STRING, GRAPH_FILE
+            , ALGORITHM_STRING);
+        }
+
+    }
+
+    public static int algorithmToRun()
+    {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        boolean done = false;
+        int valid_input = 0;
+
+        do
+        {
+            try
+            {
+                System.out.print("Enter 1 to run the Shortest path"
+                    + " algorithm, 2 to run"
+                    + " Cheapest path algorithm: ");
+                input = scanner.nextLine();
+                System.out.println("");
+                valid_input = Integer.parseInt(input);
+                if (valid_input == 1 || (valid_input == 2))
+                {
+                    done = true;
+                }
+                else
+                {
+                    throw new InvalidInputException();
+                }
+            }
+            catch (InvalidInputException iie)
+            {
+                System.out.println(iie);
+            }
+            catch (NumberFormatException nfe)
+            {
+                System.out.println("Hey, that's not a number");
+            }
+        } while(!done);
+
+        return valid_input;
     }
 
     public static GraphInterface<String> getInput()
